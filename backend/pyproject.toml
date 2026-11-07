@@ -1,0 +1,21 @@
+[project]
+name = "finance-dashboard-api"
+version = "1.0.0"
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = ["alembic/versions"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+# FastAPI declares Query()/Depends() in argument defaults; get_owned uses a TypeVar on purpose.
+ignore = ["B008", "UP047"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501"]

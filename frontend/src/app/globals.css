@@ -1,0 +1,253 @@
+@import "tailwindcss";
+
+/*
+  Khata design tokens: white paper, black ink, one orange accent.
+  Chart colors are the categorical palette (orange first); they are never used for text.
+*/
+:root {
+  --paper: #0a0a0a;
+  --surface: #141414;
+  --surface-2: #1d1d1d;
+  --ink: #f5f4f2;
+  --ink-2: #cbc9c5;
+  --ink-3: #9b9892;
+  --line: #2a2a2a;
+  --line-strong: #404040;
+  --rule: #ff6a13;
+  --accent: #ff6a13;
+  --accent-ink: #ff8a45;
+  --accent-soft: #2b1608;
+  --focus: #ff8a45;
+  --danger: #ff8a7d;
+  --danger-soft: #3a1815;
+  --good: #5fd49a;
+  --good-soft: #12281c;
+  --warn: #f0be5a;
+  --warn-soft: #2d2410;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 12px 30px -16px rgb(0 0 0 / 0.8);
+
+  /* data colors: categorical slots in fixed order */
+  --series-1: #ff6a13;
+  --series-2: #f5f4f2;
+  --series-3: #4d94ee;
+  --series-4: #f0b429;
+  --series-5: #2fc48c;
+  --series-6: #ee8fb3;
+  --series-7: #9085e9;
+  --series-8: #ef6b6b;
+  --seq-1: #3a1d0a;
+  --seq-4: #d9560c;
+  --seq-7: #ffc9a3;
+  --grid: #262626;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-good: var(--good);
+  --color-good-soft: var(--good-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  background: var(--paper);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+::selection {
+  background: color-mix(in oklab, var(--focus) 30%, transparent);
+}
+
+/* Money is always set in tabular figures so columns line up like a ledger. */
+.num {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum", "lnum";
+  letter-spacing: -0.01em;
+}
+
+@layer components {
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  /* The ledger margin: a double red rule down the left edge of a panel. */
+  .ledger-margin {
+    position: relative;
+  }
+  .ledger-margin::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 14px;
+    width: 3px;
+    border-left: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .field {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.55rem 0.8rem;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: 9px;
+    color: var(--ink);
+    font: inherit;
+  }
+  .field::placeholder {
+    color: var(--ink-3);
+  }
+  .field:hover {
+    border-color: var(--ink-3);
+  }
+  textarea.field {
+    min-height: 5.5rem;
+    resize: vertical;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 9px;
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background-color 120ms,
+      border-color 120ms,
+      transform 120ms;
+  }
+  .btn:hover:not(:disabled) {
+    background: var(--surface-2);
+  }
+  .btn:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0a0a0a;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: color-mix(in oklab, var(--accent) 88%, black);
+    border-color: color-mix(in oklab, var(--accent) 88%, black);
+  }
+  .btn-danger {
+    background: var(--danger);
+    border-color: var(--danger);
+    color: var(--surface);
+  }
+  .btn-danger:hover:not(:disabled) {
+    background: color-mix(in oklab, var(--danger) 88%, black);
+  }
+  .btn-sm {
+    min-height: 36px;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.875rem;
+  }
+  .btn-ghost {
+    border-color: transparent;
+    background: transparent;
+  }
+  .btn-icon {
+    min-width: 36px;
+    padding: 0.25rem;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+}
+
+/* Dotted leader between a label and its amount, like a printed ledger line. */
+.leader {
+  flex: 1;
+  min-width: 1rem;
+  border-bottom: 2px dotted var(--line-strong);
+  transform: translateY(-4px);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+.fade-in {
+  animation: fade-in 220ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+dialog::backdrop {
+  background: rgb(10 10 10 / 0.6);
+  backdrop-filter: blur(2px);
+}
+
+/* Recharts: keep the library's default focus ring out of the way of ours. */
+.recharts-wrapper,
+.recharts-surface {
+  outline: none;
+}

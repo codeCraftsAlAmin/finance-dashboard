@@ -1,0 +1,11 @@
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30
+sqlalchemy>=2.0,<2.2
+alembic>=1.13
+pydantic[email]>=2.7
+pydantic-settings>=2.3
+bcrypt>=4.1
+PyJWT>=2.8
+cryptography>=43
+tzdata
+psycopg[binary]>=3.2
