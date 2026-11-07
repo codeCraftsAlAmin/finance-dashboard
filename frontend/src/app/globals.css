@@ -5,40 +5,41 @@
   Chart colors are the categorical palette (orange first); they are never used for text.
 */
 :root {
-  --paper: #0a0a0a;
-  --surface: #141414;
-  --surface-2: #1d1d1d;
-  --ink: #f5f4f2;
-  --ink-2: #cbc9c5;
-  --ink-3: #9b9892;
-  --line: #2a2a2a;
-  --line-strong: #404040;
-  --rule: #ff6a13;
-  --accent: #ff6a13;
-  --accent-ink: #ff8a45;
-  --accent-soft: #2b1608;
-  --focus: #ff8a45;
-  --danger: #ff8a7d;
-  --danger-soft: #3a1815;
-  --good: #5fd49a;
-  --good-soft: #12281c;
-  --warn: #f0be5a;
-  --warn-soft: #2d2410;
-  --shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 12px 30px -16px rgb(0 0 0 / 0.8);
+  --paper: #161618;
+  --surface: #1d1d20;
+  --surface-2: #26262a;
+  --ink: #f4f2ef;
+  --ink-2: #cfcbc6;
+  --ink-3: #9a9690;
+  --line: #2d2d32;
+  --line-strong: #3f3f45;
+  --rule: #d2582b;
+  --accent: #d2582b;
+  --accent-2: #e07a3f;
+  --accent-ink: #ee8e5f;
+  --accent-soft: #2a1a14;
+  --focus: #ee8e5f;
+  --danger: #ff8f82;
+  --danger-soft: #3a1b18;
+  --good: #66d9a2;
+  --good-soft: #14281f;
+  --warn: #f2c15f;
+  --warn-soft: #2e2611;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 20px 40px -26px rgb(0 0 0 / 0.85);
 
   /* data colors: categorical slots in fixed order */
-  --series-1: #ff6a13;
-  --series-2: #f5f4f2;
-  --series-3: #4d94ee;
-  --series-4: #f0b429;
-  --series-5: #2fc48c;
-  --series-6: #ee8fb3;
-  --series-7: #9085e9;
-  --series-8: #ef6b6b;
-  --seq-1: #3a1d0a;
-  --seq-4: #d9560c;
-  --seq-7: #ffc9a3;
-  --grid: #262626;
+  --series-1: #dc6532;
+  --series-2: #f4f2ef;
+  --series-3: #4f9bf0;
+  --series-4: #f2c15f;
+  --series-5: #34c795;
+  --series-6: #ee93b6;
+  --series-7: #9a8fed;
+  --series-8: #e8605a;
+  --seq-1: #38211a;
+  --seq-4: #c5531f;
+  --seq-7: #f7c9ad;
+  --grid: #2a2a2f;
   color-scheme: dark;
 }
 
@@ -53,6 +54,7 @@
   --color-line-strong: var(--line-strong);
   --color-rule: var(--rule);
   --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
   --color-danger: var(--danger);
@@ -99,9 +101,11 @@ body {
 
 @layer components {
   .panel {
-    background: var(--surface);
+    background:
+      radial-gradient(120% 90% at 100% 0%, rgb(210 88 43 / 0.14) 0%, transparent 55%),
+      var(--surface);
     border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: 24px;
     box-shadow: var(--shadow);
   }
 
@@ -124,11 +128,19 @@ body {
     width: 100%;
     min-height: 44px;
     padding: 0.55rem 0.8rem;
-    background: var(--surface);
+    background: var(--paper);
     border: 1px solid var(--line-strong);
-    border-radius: 9px;
+    border-radius: 14px;
     color: var(--ink);
     font: inherit;
+    transition:
+      border-color 120ms,
+      box-shadow 120ms;
+  }
+  .field:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgb(210 88 43 / 0.28);
   }
   .field::placeholder {
     color: var(--ink-3);
@@ -149,8 +161,8 @@ body {
     min-height: 44px;
     padding: 0.5rem 1rem;
     border: 1px solid var(--line-strong);
-    border-radius: 9px;
-    background: var(--surface);
+    border-radius: 999px;
+    background: var(--surface-2);
     color: var(--ink);
     font: inherit;
     font-weight: 600;
@@ -171,13 +183,14 @@ body {
     cursor: not-allowed;
   }
   .btn-primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #0a0a0a;
+    background: linear-gradient(180deg, #d9622f 0%, #b8481f 100%);
+    border-color: #d9622f;
+    color: #fff;
+    box-shadow: 0 8px 20px -10px rgb(210 88 43 / 0.7);
   }
   .btn-primary:hover:not(:disabled) {
-    background: color-mix(in oklab, var(--accent) 88%, black);
-    border-color: color-mix(in oklab, var(--accent) 88%, black);
+    background: linear-gradient(180deg, #e26d3a 0%, #c4502a 100%);
+    border-color: #e26d3a;
   }
   .btn-danger {
     background: var(--danger);

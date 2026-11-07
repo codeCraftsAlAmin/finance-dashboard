@@ -103,7 +103,9 @@ export function AppShell({ children }: { children: ReactNode }) {
               href={href}
               aria-current={isActive(href) ? "page" : undefined}
               className={`flex min-h-10 items-center gap-3 rounded-lg px-3 font-semibold transition-colors ${
-                isActive(href) ? "bg-accent text-[#0a0a0a]" : "text-ink-2 hover:bg-surface-2 hover:text-ink"
+                isActive(href)
+                  ? "bg-accent/15 text-accent-ink shadow-[inset_3px_0_0_var(--accent)]"
+                  : "text-ink-2 hover:bg-surface-2 hover:text-ink"
               }`}
             >
               <Icon size={18} />
@@ -145,7 +147,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             href={href}
             aria-current={isActive(href) ? "page" : undefined}
             className={`flex min-h-14 flex-col items-center justify-center gap-0.5 text-[0.7rem] font-semibold ${
-              isActive(href) ? "text-ink" : "text-ink-3"
+              isActive(href) ? "text-accent-ink" : "text-ink-3"
             }`}
           >
             <Icon size={21} strokeWidth={isActive(href) ? 2.4 : 1.8} />
